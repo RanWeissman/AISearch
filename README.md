@@ -11,6 +11,13 @@ We introduce and evaluate two novel heuristic strategies:
 These heuristics improve upon the standard **Additive PDB (APDB)** by accounting for interactions between subgroups of discs during the solution search. The core algorithm used is **A\***, supported by precomputed PDBs and a bucket-based strategy for enhanced performance and admissibility.
 
 ---
+## 👨‍💻 Authors
+
+The project was collaboratively developed by:
+
+- Ran Weissman  
+- Uriel Zaed
+---
 
 ## 🙏 Acknowledgment
 
