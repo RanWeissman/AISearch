@@ -1,4 +1,4 @@
-class Node():
+class Node:
     def __init__(self, state, parent, g_n, h_n=0):
         self.state = state
         self.parent = parent

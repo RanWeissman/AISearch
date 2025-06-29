@@ -1,24 +1,16 @@
 
-import a_star_buckets_min_sol
-from const import *
-from bfs import BFS
 from static_functions import *
 import json
-from a_star_hur_additive import A_Star_Additive
-from a_star_pdbi import A_Star_PDBI
-from a_star_buckets import A_Star_Buckets
-from a_star_buckets_pdbi import A_Star_Buckets_PDBI
 from a_star_buckets_min_sol import A_Star_Buckets_Min_Sol
 
-
-################### A* ############################
+# ################## A* ############################
 with open(f'hanoi_pdb_{num_disks-num_small_disk}.txt', "r") as file:
-    fileData  = file.read()
-    database = json.loads(fileData)
+    file_data = file.read()
+    database = json.loads(file_data)
 
-price_buckets = {} # key = price, value = (conig,allowed pegs)
+price_buckets = {}  # key = price, value = (conig,allowed pegs)
 
-for config in database: # buckets creating
+for config in database:  # buckets creating
     if database[config][0] not in price_buckets.keys():
         price_buckets[database[config][0]] = [(config, database[config][1])]
     else:
@@ -32,7 +24,7 @@ a_star_buckets = {}
 for bucket in price_buckets.keys():
     a_star_buckets[bucket] = []
     for config_tuple in price_buckets[bucket]:
-        a_star_buckets[bucket].extend(generate_complete_config(config_tuple[0],config_tuple[1]))
+        a_star_buckets[bucket].extend(generate_complete_config(config_tuple[0], config_tuple[1]))
 
 print(a_star_buckets)
 
@@ -52,14 +44,15 @@ for bucket in a_star_buckets.keys():
     a_star_bucketing_min_p = solved_node_min.g_n
     a_star_bucketing_min_nodes = a_star_bucketing_min.N
 
-
-    bucket_min_price[bucket] = {"bucketing_price": a_star_bucketing_p, "bucketing_min_price":a_star_bucketing_min_p,
-                                 "bucketing_nodes_N":a_star_bucketing_nodes, "num_initial_states": len(a_star_buckets[bucket]),
-                                "bucketing_nodes_min_N":a_star_bucketing_min_nodes, "min_state": min_state}
+    bucket_min_price[bucket] = {"bucketing_price": a_star_bucketing_p, "bucketing_min_price": a_star_bucketing_min_p,
+                                "bucketing_nodes_N": a_star_bucketing_nodes,
+                                "num_initial_states": len(a_star_buckets[bucket]),
+                                "bucketing_nodes_min_N": a_star_bucketing_min_nodes, "min_state": min_state}
     print(f"A* bucket {bucket} done...")
 
 
 print(bucket_min_price)
 
 with open(f'compare_bucket_min_price_{num_disks-num_small_disk}.txt', 'w') as convert_file: 
-     convert_file.write(json.dumps(bucket_min_price))
+    convert_file.write(json.dumps(bucket_min_price))
+
